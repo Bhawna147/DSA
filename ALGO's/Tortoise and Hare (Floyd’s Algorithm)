@@ -1,4 +1,4 @@
-// Application_1  -> Check if a singly linked list is circular and if it returns the node where the cycle begins. 
+// Application_1  -> Check if a singly linked list is circular and if it is then returns the node where the cycle begins. 
 
 // TC - O(n)
 // SC - O(1)
