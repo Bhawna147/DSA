@@ -1,0 +1,39 @@
+// Application_1  -> Check if a singly linked list is circular and if it returns the node where the cycle begins. 
+
+// TC - O(n)
+// SC - O(1)
+    
+    
+
+Node *find_loop(Node *head)
+{
+  if (head == NULL)
+		return NULL;
+    
+	Node *fast = head;
+	Node *slow = head;
+
+	while ( fast != NULL &&  fast->next != NULL )
+	{
+   fast = fast->next->next;
+   slow = slow->next;
+
+    
+		if (fast == slow)   //Cycle found
+		{
+			slow = head;
+			while (fast != slow)
+			{
+				fast = fast->next;
+				slow = slow->next;
+			}
+			return (fast);
+		}
+    
+    
+	}
+  
+	return NULL;
+}
+
+
