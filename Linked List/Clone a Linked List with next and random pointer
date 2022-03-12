@@ -1,0 +1,74 @@
+//Clone a Linked List with next and random pointer
+
+//_______Approach 1- > Map
+//TC  = O(N) + O (N)
+// SC = O(N)
+
+ //______ Approach 2
+ 
+ // TC -> O(N) + O(N) + O(N)  ~ O(N)
+ // SC -> O(1 )
+    
+    
+ Node* copyRandomList(Node* head) {
+     
+        // STEP 1 -> CREATE DUMMY NODES LINKING AFTER EACH NODES
+        // STEP 2 -> CONNECT RANDOM NODES of dummy nodes
+        // STEP 3 -> CONNECT NEXT NODES( SEPARATE LISTS )
+        
+    if(head == NULL)
+            return NULL;
+        
+//step 1    
+        Node* itr    = head;
+        Node* front  = head;
+     
+        
+        while( itr != NULL){
+            
+            front = itr->next;
+            
+            int data    = itr->val;
+            Node* copy  = new Node(data);
+            
+            itr->next   = copy ;
+            copy->next  = front;
+            
+            itr = front;
+            
+        }
+            
+// step 2
+        itr = head;
+            
+        while( itr != NULL){
+            
+            if(itr->random != NULL){
+                itr->next->random = itr->random->next;
+                // copy->random __ will point to __ main node random->next 
+            }
+            
+          itr = itr->next->next;
+        }
+        
+//step 3
+        itr = head;
+        
+        Node* pseudoHead = new Node(0);
+        Node* copy = pseudoHead;  // update this
+        
+        while(itr != NULL) {
+            
+            front = itr->next->next;
+            
+            copy->next = itr->next;   //copy list
+             
+            itr->next = front;  // original list
+            copy=copy->next;
+            itr = front;
+             
+        }
+        
+            return pseudoHead->next;
+        
+    }
